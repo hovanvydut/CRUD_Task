@@ -15,13 +15,6 @@ import { User } from './entity/user.entity';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  create(
-    @Body(new ValidationPipe()) createUserDto: CreateUserDto,
-  ): Promise<void> {
-    return this.userService.create(createUserDto);
-  }
-
   @Get()
   findAll(): Promise<User[]> {
     return this.userService.findAll();
@@ -30,5 +23,12 @@ export class UserController {
   @Get(':id')
   findOneById(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.findOneById(id);
+  }
+
+  @Post()
+  create(
+    @Body(new ValidationPipe()) createUserDto: CreateUserDto,
+  ): Promise<void> {
+    return this.userService.create(createUserDto);
   }
 }

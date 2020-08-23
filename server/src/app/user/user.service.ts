@@ -8,7 +8,6 @@ import { UserRepository } from './user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { EXIST_USERNAME_MSG } from 'src/common/constant/error-message.constant';
 import { User } from './entity/user.entity';
-import { InsertResult } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
