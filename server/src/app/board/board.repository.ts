@@ -27,24 +27,35 @@ export class BoardRepository extends Repository<Board> {
       .getMany();
   }
 
-  findOneByIdAndAuthor(id: number, authorId: number): Promise<Board> {
+  findOneByIdAndAuthor(boardId: number, authorId: number): Promise<Board> {
     return this.createQueryBuilder()
-      .where({ id, author: authorId })
+      .where({ id: boardId, author: authorId })
       .getOne();
   }
 
-  updateById(id: number, updateBoardDto: UpdateBoardDto, authorId: number) {
+  updateById(
+    boardId: number,
+    updateBoardDto: UpdateBoardDto,
+    authorId: number,
+  ) {
     return this.createQueryBuilder()
       .update()
       .set(updateBoardDto)
-      .where({ id, author: authorId })
+      .where({ id: boardId, author: authorId })
       .execute();
   }
 
-  deleteById(id: number, authorId: number): Promise<DeleteResult> {
+  deleteById(boardId: number, authorId: number): Promise<DeleteResult> {
     return this.createQueryBuilder()
       .delete()
-      .where({ id, author: authorId })
+      .where({ id: boardId, author: authorId })
       .execute();
+  }
+
+  addMembers(boardId: number, memberIds: number[]) {
+    return this.createQueryBuilder()
+      .relation(Board, 'members')
+      .of(boardId)
+      .add(memberIds);
   }
 }

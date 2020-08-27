@@ -9,6 +9,8 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { EXIST_USERNAME_MSG } from 'src/common/constant/error-message.constant';
 import { User } from './entity/user.entity';
 import * as bcrypt from 'bcrypt';
+import { IConditionQueryUser } from './interface/condition-query-user.interface';
+import { FindOneOptions } from 'typeorm';
 
 @Injectable()
 export class UserService {
@@ -34,11 +36,11 @@ export class UserService {
     return this.userRepository.find();
   }
 
-  findOneById(id: number): Promise<User> {
-    return this.userRepository.findOne({ id });
+  findOneById(userId: number): Promise<User> {
+    return this.userRepository.findOne({ id: userId });
   }
 
-  findOne(option: object) {
-    return this.userRepository.findOne(option);
+  findOne(conditions: IConditionQueryUser, options?: FindOneOptions<User>) {
+    return this.userRepository.findOne(conditions, options);
   }
 }

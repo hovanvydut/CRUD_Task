@@ -20,11 +20,12 @@ export class UserController {
     return this.userService.findAll();
   }
 
-  @Get(':id')
-  findOneById(@Param('id', ParseIntPipe) id: number): Promise<User> {
-    return this.userService.findOneById(id);
+  @Get(':userId')
+  findOneById(@Param('userId', ParseIntPipe) userId: number): Promise<User> {
+    return this.userService.findOneById(userId);
   }
 
+  //NOTE: Trim tat ca space du lieu gui len
   @Post()
   create(
     @Body(new ValidationPipe()) createUserDto: CreateUserDto,

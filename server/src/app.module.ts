@@ -4,6 +4,8 @@ import { TaskModule } from 'src/app/task/task.module';
 import { BoardModule } from 'src/app/board/board.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/app/auth/auth.module';
+import { RoleModule } from './app/role/role.module';
+import { PermissionModule } from './app/permission/permission.module';
 
 @Module({
   imports: [
@@ -17,6 +19,8 @@ import { AuthModule } from 'src/app/auth/auth.module';
     TaskModule,
     BoardModule,
     AuthModule,
+    RoleModule,
+    PermissionModule,
   ],
 })
 export class AppModule {}
